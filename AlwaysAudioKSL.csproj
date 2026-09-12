@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>AlwaysAudioKSL</AssemblyName>
+    <RootNamespace>AlwaysAudioKSL</RootNamespace>
+    <Nullable>disable</Nullable>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Real KSL mods load through Kino's own KSL loader, which already has
+         Harmony/MonoMod/Mono.Cecil resident in the domain - Private=false
+         on both so neither gets copied into this mod's own output. Local
+         copies live in lib\ so this repo builds standalone, with no
+         dependency on any other project's folder existing on disk. -->
+    <Reference Include="KSL.API">
+      <HintPath>lib\KSL.API.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>lib\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(GameManaged)\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(GameManaged)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="FMODUnity">
+      <HintPath>$(GameManaged)\FMODUnity.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+</Project>
