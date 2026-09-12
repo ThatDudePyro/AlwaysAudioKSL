@@ -2,27 +2,24 @@ using System;
 using FMODUnity;
 using HarmonyLib;
 using KSL.API;
-using UnityEngine;
 
 namespace AlwaysAudioKSL
 {
-	[KSLMeta("AlwaysAudioKSL", "1.0.0", "Pyro")]
+	[KSLMeta("AlwaysAudioKSL", "1.0.1", "Pyro")]
 	public class AlwaysAudioKSL : BaseMod
 	{
-		private const string HarmonyId = "AlwaysAudioKSL.patch";
 		private Harmony _harmony;
 
 		void Awake()
 		{
 			try
 			{
-				_harmony = new Harmony(HarmonyId);
-				var target = AccessTools.Method(typeof(RuntimeManager), "OnApplicationPause", new[] { typeof(bool) });
-				_harmony.Patch(target, new HarmonyMethod(typeof(AlwaysAudioKSL), nameof(SkipPause)));
+				_harmony = new Harmony("AlwaysAudioKSL.patch");
+				var target = AccessTools.Method(typeof(RuntimeManager), "MuteAllEvents", new[] { typeof(bool) });
+				_harmony.Patch(target, new HarmonyMethod(typeof(AlwaysAudioKSL), nameof(SkipMute)));
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
-				Debug.LogError("[AlwaysAudioKSL] failed to patch RuntimeManager.OnApplicationPause: " + ex);
 			}
 		}
 
@@ -31,7 +28,7 @@ namespace AlwaysAudioKSL
 			_harmony?.UnpatchSelf();
 		}
 
-		private static bool SkipPause()
+		private static bool SkipMute()
 		{
 			return false;
 		}

@@ -7,11 +7,6 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <!-- Real KSL mods load through Kino's own KSL loader, which already has
-         Harmony/MonoMod/Mono.Cecil resident in the domain - Private=false
-         on both so neither gets copied into this mod's own output. Local
-         copies live in lib\ so this repo builds standalone, with no
-         dependency on any other project's folder existing on disk. -->
     <Reference Include="KSL.API">
       <HintPath>lib\KSL.API.dll</HintPath>
       <Private>false</Private>

@@ -1,8 +1,4 @@
 bin/
 obj/
 build/
-
-# Defense in depth: the real .kmc build key must never live in this repo
-# (it stays under the game's own kino\dev\ folder - see CLAUDE.md). This
-# blocks a commit even if one ever gets pasted in here by accident.
 *.kmc
